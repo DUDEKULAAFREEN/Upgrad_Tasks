@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Enrollment Form</title>
+</head>
+<body>
+    <header>
+    <h1>Course Enrollment</h1>
+</header>
+
+<main>
+    <form>
+
+        <section>
+            <label for="course">Select Course:</label>
+            <input type="text" id="course" name="course" list="courses" required>
+            <datalist id="courses">
+                <option value="HTML">
+                <option value="CSS">
+                <option value="JavaScript">
+                <option value="Angular">
+                <option value="Java">
+            </datalist>
+        </section>
+
+        <section>
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+        </section>
+        <br>
+
+        <section>
+            <label>Skill Level:</label>
+            Beginner
+            <meter min="0" max="100" value="70"></meter>
+            Advanced
+        </section>
+        <br>
+
+        <section>
+            <label for="experience">Experience (Years):</label>
+            <input type="range" id="experience" name="experience" min="0" max="10">
+        </section>
+
+        <br>
+
+        <section>
+            <label for="hours">Study Hours per Week:</label>
+            <input type="number" id="hours" name="hours" min="1" max="40" required>
+        </section>
+        <br>
+
+        <section>
+            <label>Enrollment Completion:</label>
+            <progress value="60" max="100"></progress>
+        </section>
+        <br>
+
+            <section>
+            <input type="submit" value="Enroll here..">
+        </section>
+
+    </form>
+</main>
+</body>
+</html>
