@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Article Layout</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #eef2f5;
+        }
+
+        header {
+            background-color: #1e88e5;
+            color: #ffffff;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 25px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            flex: 1 1 280px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .card p {
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 14px;
+            background-color: #43a047;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background-color: #2e7d32;
+        }
+
+        /* Mobile View */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Tech Articles</h1>
+        <p>Latest updates from the tech world</p>
+    </header>
+
+    <main class="container">
+
+        <div class="card">
+            <h3>HTML & CSS Basics</h3>
+            <p>Learn the fundamentals of building clean and responsive web pages using HTML and CSS.</p>
+            <a href="#" class="btn">Explore</a>
+        </div>
+
+        <div class="card">
+            <h3>JavaScript Essentials</h3>
+            <p>Understand how JavaScript adds interactivity and dynamic behavior to websites.</p>
+            <a href="#" class="btn">Explore</a>
+        </div>
+
+        <div class="card">
+            <h3>Responsive Design</h3>
+            <p>Discover techniques to make your website look great on all screen sizes.</p>
+            <a href="#" class="btn">Explore</a>
+        </div>
+
+    </main>
+
+</body>
+</html>
