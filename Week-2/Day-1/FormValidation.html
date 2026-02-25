@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Form Validation</title>
+</head>
+<body>
+
+    <h2>Registration Form</h2>
+
+    Name:
+    <input type="text" id="name" onchange="validateName()">
+    <p id="nameMsg"></p>
+
+    Email:
+    <input type="text" id="email" onchange="validateEmail()">
+    <p id="emailMsg"></p>
+
+    Age:
+    <input type="number" id="age" onchange="validateAge()">
+    <p id="ageMsg"></p>
+
+    <br>
+    <button onclick="saveData()">Submit</button>
+
+    <p id="finalMsg"></p>
+
+    <script>
+
+        function validateName() {
+            var name = document.getElementById("name").value;
+
+            if (name == "") {
+                document.getElementById("nameMsg").innerHTML = "Name cannot be empty";
+            } else {
+                document.getElementById("nameMsg").innerHTML = "Valid Name";
+            }
+        }
+
+        function validateEmail() {
+            var email = document.getElementById("email").value;
+
+            if (email.indexOf("@") == -1) {
+                document.getElementById("emailMsg").innerHTML = "Email must contain @";
+            } else {
+                document.getElementById("emailMsg").innerHTML = "Valid Email";
+            }
+        }
+
+        function validateAge() {
+            var age = document.getElementById("age").value;
+
+            if (age <= 18) {
+                document.getElementById("ageMsg").innerHTML = "Age must be greater than 18";
+            } else {
+                document.getElementById("ageMsg").innerHTML = "Valid Age";
+            }
+        }
+
+        function saveData() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var age = document.getElementById("age").value;
+
+            if (name != "" && email.indexOf("@") != -1 && age > 18) {
+
+                sessionStorage.setItem("userName", name);
+                sessionStorage.setItem("userEmail", email);
+                sessionStorage.setItem("userAge", age);
+
+                document.getElementById("finalMsg").innerHTML = "Data saved successfully!";
+            } else {
+                document.getElementById("finalMsg").innerHTML = "Please correct errors before submitting.";
+            }
+        }
+
+    </script>
+
+</body>
+</html>

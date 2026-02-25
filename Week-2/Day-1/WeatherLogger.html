@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Location Logger</title>
+</head>
+<body>
+
+    <h2>Location Logger</h2>
+
+    <button onclick="getLocation()">Get My Location</button>
+
+    <p id="currentLocation"></p>
+
+    <h3>Location History (Last 5)</h3>
+    <div id="history"></div>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                document.getElementById("currentLocation").innerHTML =
+                    "Geolocation is not supported.";
+            }
+        }
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            document.getElementById("currentLocation").innerHTML =
+                "Latitude: " + latitude + "<br>Longitude: " + longitude;
+
+            saveLocation(latitude, longitude);
+        }
+        function showError(error) {
+            if (error.code == 1) {
+                alert("Permission denied.");
+            } else if (error.code == 2) {
+                alert("Location unavailable.");
+            } else if (error.code == 3) {
+                alert("Request timeout.");
+            } else {
+                alert("Unknown error.");
+            }
+        }
+        function saveLocation(lat, long) {
+
+            var locations = localStorage.getItem("locationHistory");
+
+            if (locations == null) {
+                locations = [];
+            } else {
+                locations = JSON.parse(locations);
+            }
+            locations.push({ latitude: lat, longitude: long });
+            if (locations.length > 5) {
+                locations.shift();
+            }
+            localStorage.setItem("locationHistory", JSON.stringify(locations));
+
+            displayHistory();
+        }
+        function displayHistory() {
+            var locations = localStorage.getItem("locationHistory");
+
+            if (locations != null) {
+                locations = JSON.parse(locations);
+
+                var output = "";
+
+                for (var i = 0; i < locations.length; i++) {
+                    output += "Lat: " + locations[i].latitude +
+                              " , Long: " + locations[i].longitude + "<br>";
+                }
+
+                document.getElementById("history").innerHTML = output;
+            }
+        }
+
+        window.onload = function() {
+            displayHistory();
+        };
+
+    </script>
+
+</body>
+</html>
