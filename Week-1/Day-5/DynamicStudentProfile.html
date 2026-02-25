@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Profile</title>
+</head>
+<body>
+
+    <h2>Student Profile</h2>
+
+    <div id="profile"></div>
+
+    <button id="updateBtn">Update Marks</button>
+
+    <script>
+        // Global student object
+        var student = {
+            name: "Afreen",
+            rollNo: 112,
+            marks: 80
+        };
+
+        // Function to display student details
+        function updateStudentProfile(studentObj) {
+            document.getElementById("profile").innerHTML =
+                "Name: " + studentObj.name + "<br>" +
+                "Roll No: " + studentObj.rollNo + "<br>" +
+                "Marks: " + studentObj.marks;
+        }
+
+        // Function to update marks
+        function updateMarks(newMarks) {
+            student.marks = newMarks;
+            updateStudentProfile(student);
+        }
+
+        // Initial display
+        updateStudentProfile(student);
+
+        // Button click event
+        document.getElementById("updateBtn").onclick = function() {
+            updateMarks(95);
+        };
+    </script>
+
+</body>
+</html>
