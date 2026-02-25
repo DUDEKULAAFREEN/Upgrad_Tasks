@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Data Fetcher</title>
+</head>
+<body>
+
+<h2>Weather Report</h2>
+
+<button onclick="getWeatherPromise()">Get Weather (Promise)</button>
+<button onclick="getWeatherAsync()">Get Weather (Async/Await)</button>
+
+<p id="output"></p>
+
+<script>
+
+const url = "https://api.open-meteo.com/v1/forecast?latitude=17.38&longitude=78.48&current_weather=true";
+
+const getWeatherPromise = () => {
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const temp = data.current_weather.temperature;
+            const wind = data.current_weather.windspeed;
+
+            document.getElementById("output").innerHTML =
+                `Temperature: ${temp}°C <br>
+                 Wind Speed: ${wind} km/h`;
+        })
+        .catch(error => {
+            document.getElementById("output").innerHTML =
+                "Error fetching weather data";
+            console.log(error);
+        });
+};
+
+const getWeatherAsync = async () => {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const temp = data.current_weather.temperature;
+        const wind = data.current_weather.windspeed;
+
+        document.getElementById("output").innerHTML =
+            `Temperature: ${temp}°C <br>
+             Wind Speed: ${wind} km/h`;
+
+    } catch (error) {
+        document.getElementById("output").innerHTML =
+            "Error fetching weather data";
+        console.log(error);
+    }
+};
+
+</script>
+
+</body>
+</html>
