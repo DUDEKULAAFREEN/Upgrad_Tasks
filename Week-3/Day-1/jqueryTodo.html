@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>jQuery To-Do List</title>
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+}
+
+.container {
+    width: 350px;
+}
+
+input {
+    padding: 5px;
+    width: 200px;
+}
+
+button {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+li {
+    padding: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.delete-btn {
+    margin-left: 10px;
+    color: red;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>📝 To-Do List</h3>
+
+    <input type="text" id="taskInput" placeholder="Enter task">
+    <button id="addBtn">Add</button>
+
+    <p>
+        Total Tasks: <span id="totalCount">0</span> |
+        Completed: <span id="completedCount">0</span>
+    </p>
+
+    <ul id="taskList"></ul>
+
+</div>
+
+<script>
+$(document).ready(function(){
+
+    function updateCounts() {
+        var total = $("#taskList li").length;
+        var completed = $("#taskList li.completed").length;
+
+        $("#totalCount").text(total);
+        $("#completedCount").text(completed);
+    }
+
+    // Add Task
+    $("#addBtn").on("click", function(){
+
+        var taskText = $("#taskInput").val().trim();
+
+        if(taskText !== "") {
+
+            $("#taskList").append(
+                "<li>" + taskText +
+                " <span class='delete-btn'>❌</span></li>"
+            );
+
+            $("#taskInput").val(""); // clear input
+            updateCounts();
+        }
+    });
+
+    // Mark as Complete (Event Delegation)
+    $("#taskList").on("click", "li", function(e){
+
+        // Prevent delete click from triggering complete
+        if($(e.target).hasClass("delete-btn")) return;
+
+        $(this).toggleClass("completed");
+        updateCounts();
+    });
+
+    // Delete Task (Event Delegation)
+    $("#taskList").on("click", ".delete-btn", function(){
+
+        $(this).parent().remove();
+        updateCounts();
+    });
+
+});
+</script>
+
+</body>
+</html>

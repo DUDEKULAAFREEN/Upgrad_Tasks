@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product List with Cart Counter</title>
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+}
+
+.header {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.cart-count {
+    color: green;
+    font-weight: bold;
+}
+
+.product {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    width: 300px;
+}
+
+button {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.message {
+    margin-left: 10px;
+    color: green;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    🛒 Cart Items: <span id="cartCounter" class="cart-count">0</span>
+</div>
+
+<div id="productList">
+
+    <div class="product">
+        <h4>Laptop</h4>
+        <button class="add-to-cart" data-product="Laptop">Add to Cart</button>
+        <span class="message"></span>
+    </div>
+
+    <div class="product">
+        <h4>Smartphone</h4>
+        <button class="add-to-cart" data-product="Smartphone">Add to Cart</button>
+        <span class="message"></span>
+    </div>
+
+    <div class="product">
+        <h4>Headphones</h4>
+        <button class="add-to-cart" data-product="Headphones">Add to Cart</button>
+        <span class="message"></span>
+    </div>
+
+    <div class="product">
+        <h4>Smart Watch</h4>
+        <button class="add-to-cart" data-product="Smart Watch">Add to Cart</button>
+        <span class="message"></span>
+    </div>
+
+</div>
+
+<script>
+$(document).ready(function(){
+
+    var count = 0;
+
+    // Event Delegation
+    $("#productList").on("click", ".add-to-cart", function(){
+
+        count++;
+
+        // Update cart counter using .text()
+        $("#cartCounter").text(count);
+
+        // Disable button using .prop()
+        $(this).prop("disabled", true);
+
+        // Add disabled attribute using .attr()
+        $(this).attr("title", "Already Added");
+
+        // Show confirmation message
+        $(this).siblings(".message").text("✔ Added to Cart");
+
+    });
+
+});
+</script>
+
+</body>
+</html>

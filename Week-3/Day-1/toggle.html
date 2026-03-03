@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FAQ Section</title>
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+}
+
+.faq-container {
+    width: 600px;
+}
+
+.faq-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.question {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 8px;
+}
+
+.answer {
+    display: none;
+    padding: 8px;
+    color: #555;
+}
+
+.active {
+    background-color: #f0f0f0;
+    color: teal;
+}
+</style>
+</head>
+
+<body>
+
+<div class="faq-container">
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+        <div class="question">1. What courses do you offer?</div>
+        <div class="answer">We offer Web Development, DotNET, Java, Python, Angular.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">2. How can I enroll?</div>
+        <div class="answer">You can enroll by filling out the registration form on our website.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">3. Are classes online or offline?</div>
+        <div class="answer">We provide both online and offline training sessions.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">4. Do you provide certificates?</div>
+        <div class="answer">Yes, we provide certificates after course completion.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">5. What is the course duration?</div>
+        <div class="answer">Course duration varies from 1 month to 3 months.</div>
+    </div>
+
+</div>
+
+<script>
+$(document).ready(function(){
+
+    $(".question").click(function(){
+
+        // Toggle the answer smoothly
+        $(this).next(".answer").slideToggle();
+
+        // Highlight selected question
+        $(this).toggleClass("active");
+
+    });
+
+});
+</script>
+
+</body>
+</html>
