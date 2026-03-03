@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Product Search App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+
+        .card {
+            width: 400px;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .no-results {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Product Search</h2>
+
+        <input type="text" id="searchInput" placeholder="Search products...">
+
+        <ul id="productList"></ul>
+
+        <p id="noResults" class="no-results"></p>
+    </div>
+
+    <script>
+        var products = [
+            "Laptop",
+            "Mobile Phone",
+            "Headphones",
+            "Smart Watch",
+            "Keyboard",
+            "Mouse",
+            "Camera",
+            "Charger"
+        ];
+
+        var searchInput = document.getElementById("searchInput");
+        var productList = document.getElementById("productList");
+        var noResults = document.getElementById("noResults");
+
+        // Render products to UI
+        function renderProducts(productArray) {
+            productList.innerHTML = "";
+
+            if (productArray.length === 0) {
+                noResults.textContent = "No Results Found";
+                return;
+            }
+
+            noResults.textContent = "";
+
+            productArray.forEach(function(product) {
+                var li = document.createElement("li");
+                li.textContent = product;
+                productList.appendChild(li);
+            });
+        }
+
+        // Filter logic
+        function filterProducts() {
+            var searchValue = searchInput.value.toLowerCase();
+
+            var filteredProducts = products.filter(function(product) {
+                return product.toLowerCase().includes(searchValue);
+            });
+
+            renderProducts(filteredProducts);
+        }
+
+        // Event Delegation Example (click on product)
+        function handleProductClick(event) {
+            if (event.target.tagName === "LI") {
+                alert("You selected: " + event.target.textContent);
+            }
+        }
+
+        // Event Listeners
+        searchInput.addEventListener("input", filterProducts);
+        productList.addEventListener("click", handleProductClick);
+
+        // Initial render
+        renderProducts(products);
+    </script>
+
+</body>
+</html>

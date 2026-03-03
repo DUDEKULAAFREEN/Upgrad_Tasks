@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+
+        /* Card Container */
+        .card {
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        input {
+            padding: 8px;
+            width: 65%;
+        }
+
+        .add-btn {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            padding: 8px;
+            margin-bottom: 5px;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>To-Do List</h2>
+
+        <input type="text" id="taskInput" placeholder="Enter a task">
+        <button id="addBtn" class="add-btn">Add</button>
+
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        var addBtn = document.getElementById("addBtn");
+        var taskInput = document.getElementById("taskInput");
+        var taskList = document.getElementById("taskList");
+
+        // Add Task Function
+        function addTask() {
+            var taskText = taskInput.value.trim();
+
+            if (taskText === "") {
+                alert("Please enter a task");
+                return;
+            }
+
+            var li = document.createElement("li");
+
+            li.innerHTML = `
+                <span class="task-text">${taskText}</span>
+                <button class="delete-btn">Delete</button>
+            `;
+
+            taskList.appendChild(li);
+            taskInput.value = "";
+        }
+
+        // Event Delegation (Delete + Complete)
+        function handleTaskClick(event) {
+            var target = event.target;
+
+            if (target.classList.contains("delete-btn")) {
+                target.parentElement.remove();
+            }
+
+            if (target.classList.contains("task-text")) {
+                target.classList.toggle("completed");
+            }
+        }
+
+        // Event Listeners
+        addBtn.addEventListener("click", addTask);
+        taskList.addEventListener("click", handleTaskClick);
+    </script>
+
+</body>
+</html>

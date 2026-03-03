@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Theme Toggle Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Light Theme */
+        .light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        /* Dark Theme */
+        .dark-mode {
+            background-color: #222;
+            color: white;
+        }
+
+        /* Card Container */
+        .card {
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: 350px;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 8px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: teal;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body class="light-mode">
+
+    <div class="card">
+        <h2>My Blog Page</h2>
+        <p>This is a simple blog content area.</p>
+        <button id="themeBtn">Switch to Dark Mode</button>
+    </div>
+
+    <script>
+        var button = document.getElementById("themeBtn");
+        var body = document.body;
+
+        function loadTheme() {
+            var savedTheme = localStorage.getItem("theme");
+
+            if (savedTheme === "dark") {
+                body.classList.remove("light-mode");
+                body.classList.add("dark-mode");
+                button.textContent = "Switch to Light Mode";
+            }
+        }
+
+        function toggleTheme() {
+            if (body.classList.contains("light-mode")) {
+                body.classList.remove("light-mode");
+                body.classList.add("dark-mode");
+                localStorage.setItem("theme", "dark");
+                button.textContent = "Switch to Light Mode";
+            } else {
+                body.classList.remove("dark-mode");
+                body.classList.add("light-mode");
+                localStorage.setItem("theme", "light");
+                button.textContent = "Switch to Dark Mode";
+            }
+        }
+
+        button.addEventListener("click", toggleTheme);
+
+        loadTheme();
+    </script>
+
+</body>
+</html>
